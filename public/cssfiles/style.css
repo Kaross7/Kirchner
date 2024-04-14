@@ -1,0 +1,250 @@
+/* Algemene stijlen */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Lexend Exa', sans-serif; /* Alle tekst in het lettertype Lexend Exa */
+    overflow: hidden; /* Voorkom scrollen */
+}
+ 
+.container {
+    background-color: #141414; /* Donkergrijs achtergrondkleur */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+}
+ 
+.title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: white; /* Witte tekstkleur */
+}
+ 
+/* Stijlen voor dropdown-menu */
+.menu {
+    width: 80%;
+}
+ 
+.dropdown {
+    position: relative;
+    margin-bottom: 10px;
+    
+}
+ 
+.dropbtn {
+    background-color: rgb(84, 192, 228);
+    color: black;
+    font-size: 1.25rem;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Laat de knoppen over de gehele breedte uitrekken */
+    display: flex;
+    justify-content: space-between; /* Plaatst het pijlsymbool aan de rechterkant */
+    align-items: center;
+    transition: background-color 0.3s ease; /* Overgangseffect voor achtergrondkleur */
+    
+}
+ 
+.dropbtn:hover {
+    background-color: rgba(84, 192, 228, 0.8); /* Achtergrondkleur bij hover */
+}
+ 
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    opacity: 0; /* Beginwaarde voor overgang */
+    transform: translateY(-10px); /* Beginwaarde voor overgang */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Overgangseffect */
+    text-align: left;
+}
+ 
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #ccc; /* Lijn tussen de opties */
+    font-size: 1rem; /* Tekstgrootte aanpassen */
+}
+ 
+.dropdown-content a:last-child {
+    border-bottom: none; /* Geen lijn onder de laatste optie */
+}
+ 
+.dropdown-content a:hover {
+    background-color: #ddd; /* Achtergrondkleur bij hover */
+}
+ 
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+}
+ 
+.back-button a {
+    background-color: darkgreen; /* Donkergroene achtergrond */
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Overgangseffect voor achtergrondkleur */
+    text-decoration: none;
+    font-size: 1rem; /* Tekstgrootte aanpassen */
+}
+ 
+.back-button a:hover {
+    background-color: green; /* Donkergroene achtergrond bij hover */
+}
+ 
+h2 {
+    font-size: 140%;
+}
+ 
+p{
+    font-size: 120%;
+}
+ 
+.help-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 40px; /* Diameter van de cirkel */
+    height: 40px; /* Diameter van de cirkel */
+    border-radius: 50%; /* Maak een cirkel */
+    background-color: transparent; /* Doorzichtige achtergrond */
+    border: 2px solid white; /* Witte rand */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+}
+ 
+.help-button i {
+    color: white; /* Witte kleur voor het icoon */
+    font-size: 2rem;
+}
+ 
+.help-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    display: none;
+    font-size: 90%;
+}
+ 
+.help-content {
+    text-align: left;
+}
+ 
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+ 
+ 
+.popup {
+    display: none; /* Zorg ervoor dat pop-ups standaard verborgen zijn */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    max-width: 80%; /* Voorkom dat pop-ups te breed worden op kleine schermen */
+}
+ 
+.popup-content {
+    text-align: left;
+}
+ 
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Donkere semi-transparante kleur */
+    z-index: 999; /* Zorg ervoor dat de overlay bovenaan staat */
+    display: none; /* Standaard verborgen */
+}
+ 
+ 
+.popup-content {
+    font-size: 0.8rem; /* Tekstgrootte van de pop-up aanpassen */
+}
+ 
+.popup-content input[type="text"] {
+    width: 80%; /* Breedte van het inputveld vergroten */
+    padding: 8px; /* Padding aanpassen */
+    margin-bottom: 10px; /* Marge onderaan toevoegen */
+}
+ 
+.popup-content button {
+    background-color: green; /* Achtergrondkleur van de verzendknop */
+    color: white; /* Tekstkleur van de verzendknop */
+    padding: 10px 20px; /* Padding aanpassen */
+    border: none; /* Rand verwijderen */
+    border-radius: 5px; /* Afgeronde hoeken toevoegen */
+    cursor: pointer; /* Cursor veranderen naar pointer */
+    transition: background-color 0.3s ease; /* Overgangseffect toevoegen */
+}
+ 
+.popup-content button:hover {
+    background-color: darkgreen; /* Achtergrondkleur van de verzendknop bij hover */
+}
+ 
+ 
+@media only screen and (max-width: 600px) {
+   
+    .title {
+        font-size: 2rem; /* Maak de titel kleiner */
+    }
+    h2{
+        font-size: 19px;
+    }
+    .dropbtn {
+        font-size: 1rem; /* Maak de dropdown-knoppen kleiner */
+    }
+    .help-button {
+        width: 30px; /* Verklein de breedte van de hulpknop */
+        height: 30px; /* Verklein de hoogte van de hulpknop */
+        font-size: 1rem; /* Verklein de lettergrootte van het icoon */
+    }
+    .menu {
+        width: 100%;
+    }
+    .popup, .help-message{
+        width: 80%;
+    }
+ 
+}

@@ -1,0 +1,73 @@
+body {
+    background-image: url("../images/Background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    padding-right: 20%;
+    font-family: 'Lexend Exa', sans-serif; /* Toevoegen van Lexend Exa als lettertype voor de body */
+    overflow: hidden;
+}
+
+.title-container {
+    text-align: center;
+    color: white;
+}
+
+.title {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px; /* Voeg letterruimte toe */
+    font-family: 'Lexend Exa', sans-serif; /* Toevoegen van Lexend Exa als lettertype voor de titel */
+}
+
+.subtitle1 {
+    font-size: 1.3rem;
+    margin-left: 150px;
+    text-align: left;
+    font-family: 'Lexend Exa', sans-serif; /* Toevoegen van Lexend Exa als lettertype voor de ondertitel */
+}
+
+.subtitle2 {
+    font-size: 1.3rem;
+    text-align: right;
+    font-family: 'Lexend Exa', sans-serif; /* Toevoegen van Lexend Exa als lettertype voor de ondertitel */
+}
+
+.button {
+    font-size: 1.25rem;
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: rgb(84, 192, 228); /* Lichtblauwe achtergrondkleur */
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px; /* Toegevoegde marge boven de knop */
+    font-family: 'Lexend Exa', sans-serif; 
+    transition: background-color 0.3s ease;
+}
+.button:hover {
+    background-color: skyblue; /* Lichtere achtergrondkleur bij hover */
+}
+
+/* Mediaquery voor telefoons */
+@media only screen and (max-width: 600px) {
+    body {
+        align-items: center;/
+    }
+    .title {
+        font-size: 2.3rem; /* Aanpassing van de titelgrootte voor kleinere schermen */
+    }
+    .subtitle1, .subtitle2 {
+        font-size: 1rem; /* Aanpassing van de ondertitelgrootte voor kleinere schermen */
+        margin-left: 20px; /* Aanpassing van de linker marge voor de ondertitel voor kleinere schermen */
+    }
+    .button {
+        font-size: 1rem; /* Aanpassing van de knopgrootte voor kleinere schermen */
+        padding: 8px 20px; /* Aanpassing van de padding van de knop voor kleinere schermen */
+        margin-top: 15px; /* Aanpassing van de marge boven de knop voor kleinere schermen */
+    }
+}
