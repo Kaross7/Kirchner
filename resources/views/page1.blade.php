@@ -6,6 +6,7 @@
     <title>Home</title>
     <link rel="stylesheet" href="{{ asset('cssfiles/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
     <button class="back-button"><a href="{{ route('welcome') }}"><i class="fas fa-arrow-left"></i> Terug naar homepage</a></button>
@@ -15,131 +16,70 @@
             <div class="dropdown">
                 <button class="dropbtn" onclick="toggleMenu('myPlanning')">Mijn Planning <i class="fas fa-caret-down"></i></button>
                 <div class="dropdown-content" id="myPlanning">
-                    <a href="#" onclick="openPopup('popup1')">Huidige Planning</a>
-                    <a href="#" onclick="openPopup('popup2')">Pas Mijn Planning Aan</a>
-                    <a href="#" onclick="openPopup('popup3')">Verwijder Huidige Planning</a>
-                </div>
-            </div>
-        </div>
-        <div class="menu" id="oldMessagesMenu">
-            <div class="dropdown">
-                <button class="dropbtn" onclick="toggleMenu('oldMessages')">Oude Berichten <i class="fas fa-caret-down"></i></button>
-                <div class="dropdown-content" id="oldMessages">
-                    <a href="#" onclick="openPopup('popupA')">Berichten Zien</a>
-                    <a href="#" onclick="openPopup('popupB')">Pas Berichten Aan</a>
-                    <a href="#" onclick="openPopup('popupC')">Verwijder Berichten</a>
-                </div>
-            </div>
-        </div>
-        <div class="menu" id="addMessagesMenu">
-            <div class="dropdown">
-                <button class="dropbtn" onclick="toggleMenu('addMessages')">Berichten Toevoegen <i class="fas fa-caret-down"></i></button>
-                <div class="dropdown-content" id="addMessages">
-                    <a href="#" onclick="openPopup('popupX')">Voeg Tekst Toe</a>
-                    <a href="#" onclick="openPopup('popupY')">Voeg Animatie Toe</a>
-                    <a href="#" onclick="openPopup('popupZ')">Voeg Datum/Tijd Toe</a>
+                    <a href="#" onclick="openPopup('popup1')">Zelf bericht in planning zetten</a>
+                    <a href="#" onclick="openPopup('popup2')">Kies oude bericht(en)</a>
+                    <a href="#" onclick="openPopup('popup3')">Verwijder oude bericht(en)</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="overlay" id="overlay" onclick="closeAllPopups()"></div> <!-- Overlay voor donkere achtergrond -->
-    <div class="help-button" onclick="toggleHelp()">ℹ️</div> <!-- Button met emoji/icoon als vraagteken -->
-    <div class="help-message" id="helpMessage"> <!-- Div voor het weergeven van het bericht -->
+    <div class="overlay" id="overlay" onclick="closeAllPopups()"></div>
+    <div class="help-button" onclick="toggleHelp()">ℹ️</div>
+    <div class="help-message" id="helpMessage">
         <div class="help-content">
-            <span class="close-button" onclick="closeHelp()">✖️</span> <!-- Button om het bericht te sluiten -->
+            <span class="close-button" onclick="closeHelp()">✖️</span>
             <h2>Handleiding</h2>
-            <p>Hier komt de handleiding van hoe je de website moet gebruiken...</p>
+            <p>Je hebt 3 knoppen die je kan gebruiken als je op Mijn Planning klikt, de knoppen spreken voor zichzelf :)</p>
         </div>
     </div>
 
+    <!-- Popup 1: Bericht Toevoegen -->
+    <div id="popup1" class="popup">
+        <div class="popup-content">
+            <span class="close-button" onclick="closePopup('popup1')">✖️</span>
+            <h2>Bericht Toevoegen</h2>
+            @if(session('success'))
+                <div class="alert alert-success">
+                {{ session('success') }}
+                </div>
+            @endif
 
-    <!-- Pop-ups voor Mijn Planning -->
-    <div class="popup" id="popup1">
-    <span class="close-popup" onclick="closePopup('popup1')">✖️</span>
+            <form id="planningForm" action="{{ route('plannings.store') }}" method="POST">
+                @csrf
+                <textarea name="content" placeholder="Typ je bericht hier..." required></textarea>
+                <button type="submit">Verzend</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popup 2: Oude Berichten -->
+    <div id="popup2" class="popup">
     <div class="popup-content">
-        <h2>Huidige Planning</h2>
-        <p id="selectedMessage">Geen bericht geselecteerd.</p> <!-- Toegevoegd element voor de tekst -->
+        <span class="close-button" onclick="closePopup('popup2')">✖️</span>
+        <h2>Oude Berichten</h2>
+        <ul>
+            @foreach($plannings as $planning)
+                <li>
+                    {{ $planning->content }}
+                    <button onclick="replicatePlanning({{ $planning->id }})">Opnieuw Publiceren</button>
+                </li>
+            @endforeach
+        </ul>
     </div>
 </div>
 
-
-    <div class="popup" id="popup2">
-    <span class="close-popup" onclick="closePopup('popup2')">✖️</span>
+<!-- Popup 3: Berichten Verwijderen -->
+<div id="popup3" class="popup">
     <div class="popup-content">
-        <h2>Mijn Planning Aanpassen</h2>
-        <ul id="planningMessagesList"></ul> <!-- Lijst waar de berichten getoond worden -->
+        <span class="close-button" onclick="closePopup('popup3')">✖️</span>
+        <h2>Berichten Verwijderen</h2>
+        <ul>
+            @foreach($plannings as $planning)
+                <li>{{ $planning->content }} <button onclick="deletePlanning({{ $planning->id }})">Verwijder</button></li>
+            @endforeach
+        </ul>
     </div>
 </div>
-
-
-    <div class="popup" id="popup3">
-        <span class="close-popup" onclick="closePopup('popup3')">✖️</span>
-        <div class="popup-content">
-            <h2>Verwijder Huidige Planning</h2>
-            <p>De huidige planning is succesvol verwijderd.</p>
-        </div>
-    </div>
-
-    <!-- Pop-ups voor Oude Berichten -->
-    <div class="popup" id="popupA">
-        <span class="close-popup" onclick="closePopup('popupA')">✖️</span>
-        <div class="popup-content">
-            <h2>Oude Berichten Zien</h2>
-            <!-- Inhoud voor 'Oude Berichten Zien' -->
-        </div>
-    </div>
-
-    
-    <div class="popup" id="popupB">
-    <span class="close-popup" onclick="closePopup('popupB')">✖️</span>
-    <div class="popup-content">
-        <h2>Pas Oude Berichten Aan</h2>
-        <ul id="messageList"></ul> <!-- Lijst waar berichten getoond worden -->
-        <input type="text" id="editTextInput" style="display: none;"> <!-- Verberg dit totdat een bericht gekozen is -->
-        <button onclick="updateText()" style="display: none;">Bijwerken</button>
-    </div>
-</div>
-
-
-
-    <div class="popup" id="popupC">
-        <span class="close-popup" onclick="closePopup('popupC')">✖️</span>
-        <div class="popup-content">
-            <h2>Verwijder Oude Berichten</h2>
-        </div>
-    </div>
-
-    <!-- Pop-ups voor Berichten Toevoegen -->
-    <div class="popup" id="popupX">
-    <span class="close-popup" onclick="closePopup('popupX')">✖️</span>
-    <div class="popup-content">
-        <h2>Voeg Tekst Toe</h2>
-        <input type="text" id="textInput" placeholder="Voer tekst in"> <!-- Toevoegen van id -->
-        <button onclick="saveText()">Verzenden</button> <!-- Toevoegen van onclick event -->
-    </div>
-</div>
-
-
-    <div class="popup" id="popupY">
-        <span class="close-popup" onclick="closePopup('popupY')">✖️</span>
-        <div class="popup-content">
-            <h2>Voeg Animatie Toe</h2>
-            <!-- Inhoud voor 'Voeg Animatie Toe' -->
-        </div>
-    </div>
-
-    <div class="popup" id="popupZ">
-        <span class="close-popup" onclick="closePopup('popupZ')">✖️</span>
-        <div class="popup-content">
-            <h2>Voeg Datum/Tijd Toe</h2>
-            <select id="datetimeType">
-                <option value="datum">Datum</option>
-                <option value="tijd">Tijd</option>
-                <option value="datumtijd">Datum en Tijd</option>
-            </select>
-            <button onclick="submitDateTime()">Verzenden</button>
-        </div>
-    </div>
 
     <script src="{{ asset('js/script.js') }}"></script>
 </body>

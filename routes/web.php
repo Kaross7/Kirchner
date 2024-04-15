@@ -22,6 +22,10 @@ Route::get('/page1', function () {
     return view('page1');
 })->name('page1');
 
-Route::get('/planning', [PlanningController::class, 'show'])->name('planning.show');
-Route::post('/planning/update', [PlanningController::class, 'update'])->name('planning.update');
+Route::post('/plannings', [PlanningController::class, 'store'])->name('plannings.store');
+Route::get('/planning/show', [PlanningController::class, 'show'])->name('planning.show');
+Route::get('/page1', [PlanningController::class, 'index'])->name('page1');
+Route::delete('/plannings/{id}', [PlanningController::class, 'destroy'])->name('plannings.destroy');
+Route::post('/plannings/replicate/{id}', [PlanningController::class, 'replicate'])->name('plannings.replicate');
+
 

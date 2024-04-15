@@ -53,11 +53,19 @@ body, html {
 .dropbtn:hover {
     background-color: rgba(84, 192, 228, 0.8); /* Achtergrondkleur bij hover */
 }
+
+#planningForm textarea {
+        width: 100%; /* of een specifieke breedte, bijvoorbeeld 500px */
+        padding: 10px; /* Optioneel: voegt padding binnenin de textarea toe */
+        border: 1px solid #ccc; /* Optioneel: voegt een rand toe */
+        box-sizing: border-box; 
+}
  
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
+    box-sizing: border-box;
     width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -66,6 +74,12 @@ body, html {
     transition: opacity 0.3s ease, transform 0.3s ease; /* Overgangseffect */
     text-align: left;
 }
+
+.popup-content .dropdown-content a {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
  
 .dropdown-content a {
     color: black;
@@ -136,7 +150,9 @@ p{
     color: white; /* Witte kleur voor het icoon */
     font-size: 2rem;
 }
- 
+
+
+
 .help-message {
     position: fixed;
     top: 50%;
@@ -174,12 +190,13 @@ p{
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     z-index: 9999;
-    max-width: 80%; /* Voorkom dat pop-ups te breed worden op kleine schermen */
+    width: 500px;
 }
  
 .popup-content {
     text-align: left;
 }
+
  
 .close-popup {
     position: absolute;
@@ -208,11 +225,12 @@ p{
     padding: 8px; /* Padding aanpassen */
     margin-bottom: 10px; /* Marge onderaan toevoegen */
 }
+
  
 .popup-content button {
     background-color: green; /* Achtergrondkleur van de verzendknop */
     color: white; /* Tekstkleur van de verzendknop */
-    padding: 10px 20px; /* Padding aanpassen */
+    padding: 2.5px 5px; /* Padding aanpassen */
     border: none; /* Rand verwijderen */
     border-radius: 5px; /* Afgeronde hoeken toevoegen */
     cursor: pointer; /* Cursor veranderen naar pointer */
