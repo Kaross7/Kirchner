@@ -25,9 +25,9 @@
             <div class="dropdown">
                 <button class="dropbtn" onclick="toggleMenu('oldMessages')">Oude Berichten <i class="fas fa-caret-down"></i></button>
                 <div class="dropdown-content" id="oldMessages">
-                    <a href="#" onclick="openPopup('popupA')">Oude Berichten Zien</a>
-                    <a href="#" onclick="openPopup('popupB')">Pas Oude Berichten Aan</a>
-                    <a href="#" onclick="openPopup('popupC')">Verwijder Oude Berichten</a>
+                    <a href="#" onclick="openPopup('popupA')">Berichten Zien</a>
+                    <a href="#" onclick="openPopup('popupB')">Pas Berichten Aan</a>
+                    <a href="#" onclick="openPopup('popupC')">Verwijder Berichten</a>
                 </div>
             </div>
         </div>
@@ -55,20 +55,22 @@
 
     <!-- Pop-ups voor Mijn Planning -->
     <div class="popup" id="popup1">
-        <span class="close-popup" onclick="closePopup('popup1')">✖️</span>
-        <div class="popup-content">
-            <h2>Huidige Planning</h2>
-            <!-- Inhoud voor 'Huidige Planning' -->
-        </div>
+    <span class="close-popup" onclick="closePopup('popup1')">✖️</span>
+    <div class="popup-content">
+        <h2>Huidige Planning</h2>
+        <p id="selectedMessage">Geen bericht geselecteerd.</p> <!-- Toegevoegd element voor de tekst -->
     </div>
+</div>
+
 
     <div class="popup" id="popup2">
-        <span class="close-popup" onclick="closePopup('popup2')">✖️</span>
-        <div class="popup-content">
-            <h2>Pas Mijn Planning Aan</h2>
-            <!-- Inhoud voor 'Pas Mijn Planning Aan' -->
-        </div>
+    <span class="close-popup" onclick="closePopup('popup2')">✖️</span>
+    <div class="popup-content">
+        <h2>Mijn Planning Aanpassen</h2>
+        <ul id="planningMessagesList"></ul> <!-- Lijst waar de berichten getoond worden -->
     </div>
+</div>
+
 
     <div class="popup" id="popup3">
         <span class="close-popup" onclick="closePopup('popup3')">✖️</span>
@@ -87,31 +89,36 @@
         </div>
     </div>
 
+    
     <div class="popup" id="popupB">
-        <span class="close-popup" onclick="closePopup('popupB')">✖️</span>
-        <div class="popup-content">
-            <h2>Pas Oude Berichten Aan</h2>
-            <!-- Inhoud voor 'Pas Oude Berichten Aan' -->
-        </div>
+    <span class="close-popup" onclick="closePopup('popupB')">✖️</span>
+    <div class="popup-content">
+        <h2>Pas Oude Berichten Aan</h2>
+        <ul id="messageList"></ul> <!-- Lijst waar berichten getoond worden -->
+        <input type="text" id="editTextInput" style="display: none;"> <!-- Verberg dit totdat een bericht gekozen is -->
+        <button onclick="updateText()" style="display: none;">Bijwerken</button>
     </div>
+</div>
+
+
 
     <div class="popup" id="popupC">
         <span class="close-popup" onclick="closePopup('popupC')">✖️</span>
         <div class="popup-content">
             <h2>Verwijder Oude Berichten</h2>
-            <p>De oude berichten zijn succesvol verwijderd.</p>
         </div>
     </div>
 
     <!-- Pop-ups voor Berichten Toevoegen -->
     <div class="popup" id="popupX">
-        <span class="close-popup" onclick="closePopup('popupX')">✖️</span>
-        <div class="popup-content">
-            <h2>Voeg Tekst Toe</h2>
-            <input type="text" placeholder="Voer tekst in">
-            <button>Verzenden</button>
-        </div>
+    <span class="close-popup" onclick="closePopup('popupX')">✖️</span>
+    <div class="popup-content">
+        <h2>Voeg Tekst Toe</h2>
+        <input type="text" id="textInput" placeholder="Voer tekst in"> <!-- Toevoegen van id -->
+        <button onclick="saveText()">Verzenden</button> <!-- Toevoegen van onclick event -->
     </div>
+</div>
+
 
     <div class="popup" id="popupY">
         <span class="close-popup" onclick="closePopup('popupY')">✖️</span>

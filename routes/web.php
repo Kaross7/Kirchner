@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PlanningController; // Zorg ervoor dat je dit toevoegt
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-
 Route::get('/page1', function () {
     return view('page1');
 })->name('page1');
 
-
+Route::get('/planning', [PlanningController::class, 'show'])->name('planning.show');
+Route::post('/planning/update', [PlanningController::class, 'update'])->name('planning.update');
 
